@@ -1,0 +1,41 @@
+## Problem: Mosquito and Sleeping Kids
+
+You are given a hotel with n rooms and m bidirectional doors connecting some pairs of rooms.
+
+Each room has one of three types:
+- 0: empty room
+- 1: room with a sleeping kid
+- 2: room with a mosquito
+
+Mosquitoes can move freely through any sequence of connected open doors (undirected graph).
+
+Your task is to close the minimum number of doors such that no mosquito can reach any room with a sleeping kid.
+In other words, after closing some doors, there should be no path from any type-2 room to any type-1 room.
+
+Output a single integer: the minimum number of doors to close.
+
+Special cases:
+- If there are no mosquitoes (no type 2 rooms) → output 0
+- If there are no kids (no type 1 rooms) → output 0
+- If mosquitoes and kids are already in different connected components → output 0
+
+Input format (example):
+First line:          n m
+Second line:         n integers (room types for rooms 1 to n)
+Next m lines:        u v     (undirected door between room u and room v)
+
+Constraints (typical):
+1 ≤ n ≤ 10^5
+0 ≤ m ≤ 10^5
+room type ∈ {0,1,2}
+
+This is equivalent to finding the minimum number of edges to remove to disconnect all type-2 rooms from all type-1 rooms in an undirected graph.
+It can be solved using maximum flow / min-cut by:
+- Adding a super-source connected to all mosquito rooms (capacity ∞)
+- Adding a super-sink connected from all kid rooms (capacity ∞)
+- Setting capacity 1 on every original door/edge
+- Computing max flow from super-source to super-sink
+(The min-cut value = minimum doors to close)
+
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
